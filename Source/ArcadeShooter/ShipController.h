@@ -26,4 +26,16 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere)
+	UShapeComponent* CollisionBox;
+
+	UPROPERTY(EditAnywhere)
+	float Speed = 10.0f;
+
+	void Move_XAxis(float AxisValue);
+	void Move_YAxis(float AxisValue);
+	void Fire();
+
+	FVector CurrentVelocity;
+
 };
