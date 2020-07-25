@@ -14,4 +14,5 @@ class ARCADESHOOTER_API AArcadeShooterGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+
 };
