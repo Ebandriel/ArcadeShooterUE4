@@ -32,6 +32,11 @@ public:
 	UPROPERTY(EditAnywhere)
 	float Speed = 10.0f;
 
+	UPROPERTY(EditAnywhere, Category="Spawning")
+	TSubclassOf<class ABulletController> BulletBlueprint;
+	
+	
+
 	void Move_XAxis(float AxisValue);
 	void Move_YAxis(float AxisValue);
 	void Fire();
