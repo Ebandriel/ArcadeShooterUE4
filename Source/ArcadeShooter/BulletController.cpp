@@ -2,6 +2,7 @@
 
 #include "ArcadeShooter.h"
 #include "BulletController.h"
+#include "EnemyController.h"
 
 // Sets default values
 ABulletController::ABulletController()
@@ -10,6 +11,8 @@ ABulletController::ABulletController()
 	PrimaryActorTick.bCanEverTick = true;
 
 	RootBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
+	RootBox->SetRelativeLocation(GetActorLocation());
+	RootBox->OnComponentBeginOverlap.AddDynamic(this, &ABulletController::OnOverlap);
 
 }
 
@@ -31,6 +34,17 @@ void ABulletController::Tick(float DeltaTime)
 	if (NewLocation.X > 600.0f)
 	{
 		this->Destroy();
+	}
+}
+
+void ABulletController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Overlap"));
+
+	if (OtherActor->IsA(AEnemyController::StaticClass()))
+	{
+		this->Destroy();
+		OtherActor->Destroy();
 	}
 }
 

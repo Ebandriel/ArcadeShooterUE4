@@ -10,6 +10,8 @@ AEnemyController::AEnemyController()
 	PrimaryActorTick.bCanEverTick = true;
 
 	RootBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
+	
+
 
 }
 
@@ -29,7 +31,7 @@ void AEnemyController::Tick(float DeltaTime)
 	NewLocation.X += Speed * DeltaTime;
 	SetActorLocation(NewLocation);
 
-	if (NewLocation.X > 600.0f)
+	if (NewLocation.X < -600.0f)
 	{
 		this->Destroy();
 	}
