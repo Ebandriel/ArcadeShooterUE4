@@ -2,8 +2,7 @@
 
 #include "ArcadeShooter.h"
 #include "ShipController.h"
-#include "Components/BoxComponent.h"
-#include "Kismet/GameplayStatics.h"
+
 
 // Sets default values
 AShipController::AShipController()
