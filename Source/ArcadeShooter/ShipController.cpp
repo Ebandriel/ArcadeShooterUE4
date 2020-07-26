@@ -45,6 +45,7 @@ void AShipController::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	InputComponent->BindAxis("MoveX", this, &AShipController::Move_XAxis);
 	InputComponent->BindAxis("MoveY", this, &AShipController::Move_YAxis);
 	InputComponent->BindAction("Fire", IE_Pressed, this, &AShipController::Fire);
+	InputComponent->BindAction("Restart", IE_Pressed, this, &AShipController::OnRestart).bExecuteWhenPaused = true;
 }
 
 void AShipController::Move_XAxis(float AxisValue)
@@ -64,6 +65,14 @@ void AShipController::Fire()
 		FVector Location = GetActorLocation();
 		World->SpawnActor<ABulletController>
 			(BulletBlueprint, Location, FRotator::ZeroRotator);
+	}
+}
+
+void AShipController::OnRestart()
+{
+	if (Died)
+	{
+		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 	}
 }
 
